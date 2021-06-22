@@ -4,15 +4,23 @@
 #         self.val = x
 #         self.next = None
 
-# COULD BE DONE WITH O(1) SPACE
+# Time: O(n) Space: O(1)
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
-        visited = set()
+        if head is None or head.next is None:
+            return False
         
-        while head is not None:
-            visited.add(head)
-            if head.next in visited:
-                return True
-            head = head.next
+        slow = fast = head
+        
+        while fast is not None and slow is not None:
+            slow = slow.next
             
+            # you must check if there is a valid node for fast
+            if fast.next is None:
+                return False
+            fast = fast.next.next
+            
+            if slow == fast:
+                return True
+        
         return False
