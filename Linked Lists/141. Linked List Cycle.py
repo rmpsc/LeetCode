@@ -7,17 +7,11 @@
 # Time: O(n) Space: O(1)
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
-        if head is None or head.next is None:
-            return False
-        
         slow = fast = head
         
-        while fast is not None and slow is not None:
+        # use this while loop instead of while fast is not None and slow is not None
+        while fast and fast.next:
             slow = slow.next
-            
-            # you must check if there is a valid node for fast
-            if fast.next is None:
-                return False
             fast = fast.next.next
             
             if slow == fast:
